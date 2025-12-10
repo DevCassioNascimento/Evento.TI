@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "Evento.Ti.Domain/1.0.0": {
+        "runtime": {
+          "Evento.Ti.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Evento.Ti.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

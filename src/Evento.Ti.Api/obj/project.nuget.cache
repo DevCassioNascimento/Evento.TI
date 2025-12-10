@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "QQ8w3MbQW3c=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\cassio.nascimento\\OneDrive - Adventistas\\Documentos\\Programação\\Projetos_Net\\Evento.TI\\src\\Evento.Ti.Api\\Evento.Ti.Api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\cassio.nascimento\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.0\\microsoft.aspnetcore.openapi.10.0.0.nupkg.sha512",
+    "C:\\Users\\cassio.nascimento\\.nuget\\packages\\microsoft.openapi\\2.0.0\\microsoft.openapi.2.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

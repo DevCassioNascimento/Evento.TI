@@ -1,0 +1,11 @@
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Application\bin\Debug\net10.0\Evento.Ti.Application.deps.json
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Application\bin\Debug\net10.0\Evento.Ti.Application.dll
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Application\bin\Debug\net10.0\Evento.Ti.Application.pdb
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Application\obj\Debug\net10.0\Evento.Ti.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Application\obj\Debug\net10.0\Evento.Ti.Application.AssemblyInfoInputs.cache
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Application\obj\Debug\net10.0\Evento.Ti.Application.AssemblyInfo.cs
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Application\obj\Debug\net10.0\Evento.Ti.Application.csproj.CoreCompileInputs.cache
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Application\obj\Debug\net10.0\Evento.Ti.Application.dll
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Application\obj\Debug\net10.0\refint\Evento.Ti.Application.dll
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Application\obj\Debug\net10.0\Evento.Ti.Application.pdb
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Application\obj\Debug\net10.0\ref\Evento.Ti.Application.dll

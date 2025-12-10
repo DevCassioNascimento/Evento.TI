@@ -1,0 +1,6 @@
+@Evento.Ti.Api_HostAddress = http://localhost:5268
+
+GET {{Evento.Ti.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

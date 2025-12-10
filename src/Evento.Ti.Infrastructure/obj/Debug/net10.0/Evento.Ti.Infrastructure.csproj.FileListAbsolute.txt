@@ -1,0 +1,11 @@
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Infrastructure\bin\Debug\net10.0\Evento.Ti.Infrastructure.deps.json
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Infrastructure\bin\Debug\net10.0\Evento.Ti.Infrastructure.dll
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Infrastructure\bin\Debug\net10.0\Evento.Ti.Infrastructure.pdb
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Infrastructure\obj\Debug\net10.0\Evento.Ti.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Infrastructure\obj\Debug\net10.0\Evento.Ti.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Infrastructure\obj\Debug\net10.0\Evento.Ti.Infrastructure.AssemblyInfo.cs
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Infrastructure\obj\Debug\net10.0\Evento.Ti.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Infrastructure\obj\Debug\net10.0\Evento.Ti.Infrastructure.dll
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Infrastructure\obj\Debug\net10.0\refint\Evento.Ti.Infrastructure.dll
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Infrastructure\obj\Debug\net10.0\Evento.Ti.Infrastructure.pdb
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Infrastructure\obj\Debug\net10.0\ref\Evento.Ti.Infrastructure.dll
