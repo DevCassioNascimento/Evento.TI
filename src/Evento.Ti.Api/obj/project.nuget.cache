@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DlEC9GOZ7JQ=",
+  "dgSpecHash": "bv6BemKd2C4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\cassio.nascimento\\OneDrive - Adventistas\\Documentos\\Programação\\Projetos_Net\\Evento.TI\\src\\Evento.TI.Api\\Evento.Ti.Api.csproj",
+  "projectFilePath": "C:\\Users\\cassio.nascimento\\OneDrive - Adventistas\\Documentos\\Programação\\Projetos_Net\\Evento.TI\\src\\Evento.Ti.Api\\Evento.Ti.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\cassio.nascimento\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\cassio.nascimento\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.0\\microsoft.aspnetcore.openapi.10.0.0.nupkg.sha512",

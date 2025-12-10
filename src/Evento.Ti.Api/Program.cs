@@ -1,6 +1,6 @@
 using EventoTi.Infrastructure;
-
 using Evento.Ti.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -17,6 +17,19 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// ==============================
+// NOVO: Habilitar arquivos estáticos
+// Isso permite servir arquivos da pasta wwwroot (ex: index.html)
+// ==============================
+app.UseStaticFiles();
+
+// ==============================
+// NOVO: Endpoint raiz ("/")
+// Redireciona automaticamente para o arquivo /index.html dentro de wwwroot.
+// Assim, ao acessar https://localhost:xxxx/ você já cai na página HTML de teste.
+// ==============================
+app.MapGet("/", () => Results.Redirect("/index.html"));
 
 var summaries = new[]
 {

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\cassio.nascimento\\OneDrive - Adventistas\\Documentos\\Programação\\Projetos_Net\\Evento.TI\\src\\Evento.TI.Api\\Evento.Ti.Api.csproj": {}
+    "C:\\Users\\cassio.nascimento\\OneDrive - Adventistas\\Documentos\\Programação\\Projetos_Net\\Evento.TI\\src\\Evento.Ti.Api\\Evento.Ti.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\cassio.nascimento\\OneDrive - Adventistas\\Documentos\\Programação\\Projetos_Net\\Evento.TI\\src\\Evento.TI.Api\\Evento.Ti.Api.csproj": {
+    "C:\\Users\\cassio.nascimento\\OneDrive - Adventistas\\Documentos\\Programação\\Projetos_Net\\Evento.TI\\src\\Evento.Ti.Api\\Evento.Ti.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\cassio.nascimento\\OneDrive - Adventistas\\Documentos\\Programação\\Projetos_Net\\Evento.TI\\src\\Evento.TI.Api\\Evento.Ti.Api.csproj",
+        "projectUniqueName": "C:\\Users\\cassio.nascimento\\OneDrive - Adventistas\\Documentos\\Programação\\Projetos_Net\\Evento.TI\\src\\Evento.Ti.Api\\Evento.Ti.Api.csproj",
         "projectName": "Evento.Ti.Api",
-        "projectPath": "C:\\Users\\cassio.nascimento\\OneDrive - Adventistas\\Documentos\\Programação\\Projetos_Net\\Evento.TI\\src\\Evento.TI.Api\\Evento.Ti.Api.csproj",
+        "projectPath": "C:\\Users\\cassio.nascimento\\OneDrive - Adventistas\\Documentos\\Programação\\Projetos_Net\\Evento.TI\\src\\Evento.Ti.Api\\Evento.Ti.Api.csproj",
         "packagesPath": "C:\\Users\\cassio.nascimento\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\cassio.nascimento\\OneDrive - Adventistas\\Documentos\\Programação\\Projetos_Net\\Evento.TI\\src\\Evento.TI.Api\\obj\\",
+        "outputPath": "C:\\Users\\cassio.nascimento\\OneDrive - Adventistas\\Documentos\\Programação\\Projetos_Net\\Evento.TI\\src\\Evento.Ti.Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
