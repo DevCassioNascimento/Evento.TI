@@ -9,3 +9,4 @@ C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Proje
 C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Application\obj\Debug\net10.0\refint\Evento.Ti.Application.dll
 C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Application\obj\Debug\net10.0\Evento.Ti.Application.pdb
 C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Application\obj\Debug\net10.0\ref\Evento.Ti.Application.dll
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Application\obj\Debug\net10.0\Evento.Ti.Application.sourcelink.json
