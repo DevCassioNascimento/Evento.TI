@@ -1170,10 +1170,22 @@
           "bin/placeholder/Evento.Ti.Application.dll": {}
         }
       },
+      "Evento.Ti.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/Evento.Ti.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Evento.Ti.Domain.dll": {}
+        }
+      },
       "Evento.Ti.Infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
         "dependencies": {
+          "Evento.Ti.Application": "1.0.0",
+          "Evento.Ti.Domain": "1.0.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "10.0.0"
         },
         "compile": {
@@ -1181,7 +1193,10 @@
         },
         "runtime": {
           "bin/placeholder/Evento.Ti.Infrastructure.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
@@ -3037,6 +3052,11 @@
       "type": "project",
       "path": "../Evento.Ti.Application/Evento.Ti.Application.csproj",
       "msbuildProject": "../Evento.Ti.Application/Evento.Ti.Application.csproj"
+    },
+    "Evento.Ti.Domain/1.0.0": {
+      "type": "project",
+      "path": "../Evento.Ti.Domain/Evento.Ti.Domain.csproj",
+      "msbuildProject": "../Evento.Ti.Domain/Evento.Ti.Domain.csproj"
     },
     "Evento.Ti.Infrastructure/1.0.0": {
       "type": "project",

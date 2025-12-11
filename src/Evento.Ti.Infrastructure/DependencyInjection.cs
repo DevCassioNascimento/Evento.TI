@@ -2,8 +2,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Evento.Ti.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Identity;
+using Evento.Ti.Domain.Entities;
+using Evento.Ti.Application.Auth;
+using Evento.Ti.Infrastructure.Auth;
 
-namespace EventoTi.Infrastructure
+namespace Evento.Ti.Infrastructure
 {
     public static class DependencyInjection
     {
@@ -11,15 +15,21 @@ namespace EventoTi.Infrastructure
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            // LÃª a connection string do appsettings
+            // Lê a connection string do appsettings
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
-            services.AddDbContext<AppDbContext>(options =>
+            services.AddDbContext<EventoTiDbContext>(options =>
             {
                 options.UseNpgsql(connectionString);
             });
 
-            // Aqui depois registraremos repositÃ³rios, UnitOfWork, etc.
+            // Hash de senha
+            services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+
+            // Serviço de autenticação
+            services.AddScoped<IAuthService, AuthService>();
+
+            // Aqui depois registraremos repositórios, UnitOfWork, etc.
 
             return services;
         }
