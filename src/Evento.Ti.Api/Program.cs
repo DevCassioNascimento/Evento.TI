@@ -1,5 +1,8 @@
 using Evento.Ti.Application.Auth;
 using Evento.Ti.Infrastructure;
+using Microsoft.AspNetCore.Identity;
+using Evento.TI.Application.Common.Interfaces.Authentication;
+using Evento.Ti.Domain.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,39 +20,71 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// ==============================
 // Habilitar arquivos estáticos (wwwroot)
-// ==============================
 app.UseStaticFiles();
 
-// ==============================
-// Endpoint raiz ("/") -> index.html
-// ==============================
-app.MapGet("/", () => Results.Redirect("/index.html"));
+// Autenticação e Autorização via JWT
+app.UseAuthentication();
+app.UseAuthorization();
 
-// ==============================
-// AUTH: endpoint de login
+// ==================================================================
+// Sprint 1 – Autenticação/Autorização (Login):
+// Middleware simples de LOG para enxergar o caminho das requisições
+// ==================================================================
+app.Use(async (context, next) =>
+{
+    Console.WriteLine($"[{DateTime.Now:HH:mm:ss}] {context.Request.Method} {context.Request.Path}");
+    await next();
+});
+
+// Endpoint raiz ("/") -> index.html
+app.MapGet("/", () => Results.Redirect("/html/index.html"));
+
+// ==================================================================
+// Endpoint de teste simples, sem nada de auth, só para validar rota
+// GET /test
+// ==================================================================
+app.MapGet("/test", () => Results.Ok("API ON - /test"));
+
+// ===============================
+// AUTH: endpoint de login (JWT)
 // POST /api/auth/login
 // Body: { "email": "...", "password": "..." }
-// ==============================
+// ===============================
 var authGroup = app.MapGroup("/api/auth");
 
-authGroup.MapPost("/login", async (LoginRequestDto request, IAuthService authService) =>
+authGroup.MapPost("/login", async (
+    LoginRequestDto request,
+    IAuthService authService,
+    IJwtTokenGenerator jwtTokenGenerator) =>
 {
+    // 1. Usa o serviço de autenticação para validar o usuário.
     var result = await authService.LoginAsync(request);
 
-    if (!result.Success)
+    if (!result.Success || result.UserId is null)
         return Results.Unauthorized();
 
-    // Por enquanto retornamos apenas os dados básicos do usuário.
-    // Na próxima tarefa (JWT ou cookies) vamos adicionar token/session.
-    return Results.Ok(result);
+    var token = jwtTokenGenerator.GenerateToken(
+        result.UserId.Value,
+        result.Name ?? string.Empty,
+        result.Email ?? string.Empty,
+        result.Role ?? string.Empty
+    );
+
+    var response = new
+    {
+        Id = result.UserId,
+        result.Name,
+        result.Email,
+        result.Role,
+        Token = token
+    };
+
+    return Results.Ok(response);
 })
 .WithName("Login");
 
-// ==============================
 // Endpoint de exemplo (weatherforecast)
-// ==============================
 var summaries = new[]
 {
     "Freezing", "Bracing", "Chilly", "Cool", "Mild",

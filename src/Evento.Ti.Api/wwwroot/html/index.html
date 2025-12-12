@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <title>Evento.TI - Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/login.css" />
+
+</head>
+
+
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>Evento.TI</h1>
+            <p>Acesse com seu e-mail e senha</p>
+        </div>
+
+        <form id="loginForm">
+            <div id="errorBox" class="error-message"></div>
+
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="seu.email@dominio.com"
+                    required
+                />
+            </div>
+
+            <div class="form-group">
+                <label for="password">Senha</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Digite sua senha"
+                    required
+                />
+            </div>
+
+            <div class="actions">
+                <button type="submit">Entrar</button>
+            </div>
+        </form>
+
+        <div class="footer-info">
+            <span>Backend: .NET 10 · PostgreSQL · JWT</span>
+        </div>
+    </div>
+
+    <script src="/js/session.js"></script>
+    <script src="/js/login.js"></script>
+
+
+</body>
+</html>
