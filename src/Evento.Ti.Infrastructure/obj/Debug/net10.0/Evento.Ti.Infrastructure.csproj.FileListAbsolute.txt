@@ -11,3 +11,8 @@ C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Proje
 C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Infrastructure\obj\Debug\net10.0\ref\Evento.Ti.Infrastructure.dll
 C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Infrastructure\obj\Debug\net10.0\Evento.Ti.Infrastructure.csproj.AssemblyReference.cache
 C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Infrastructure\obj\Debug\net10.0\Evento.Ti.Infrastructure.sourcelink.json
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Infrastructure\bin\Debug\net10.0\Evento.Ti.Application.dll
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Infrastructure\bin\Debug\net10.0\Evento.Ti.Domain.dll
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Infrastructure\bin\Debug\net10.0\Evento.Ti.Domain.pdb
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Infrastructure\bin\Debug\net10.0\Evento.Ti.Application.pdb
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Infrastructure\obj\Debug\net10.0\Evento.T.F53C7863.Up2Date
