@@ -195,6 +195,9 @@ C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Proje
 C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\bin\Debug\net10.0\Evento.Ti.Domain.pdb
 C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\3u3f9we25w-{0}-o9rw4dt3hx-o9rw4dt3hx.gz
 C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\8v0yaqwjt3-{0}-5ipweew5fc-5ipweew5fc.gz
-C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\j1pt60bpg3-{0}-r74dyjib06-r74dyjib06.gz
-C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\rnw7eeigkn-{0}-bl3gollghe-bl3gollghe.gz
-C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\crpe0uqq33-{0}-qihbqe3zlm-qihbqe3zlm.gz
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\uhchp4g6ue-{0}-h4qi5btv26-h4qi5btv26.gz
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\aipiu90e2i-{0}-qkc4akrj7x-qkc4akrj7x.gz
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\029hkppl5c-{0}-eia9vzdjd2-eia9vzdjd2.gz
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\j1pt60bpg3-{0}-kxtmnp6vzt-kxtmnp6vzt.gz
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\crpe0uqq33-{0}-wctl24i691-wctl24i691.gz
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\rnw7eeigkn-{0}-0w8yvv3tmf-0w8yvv3tmf.gz

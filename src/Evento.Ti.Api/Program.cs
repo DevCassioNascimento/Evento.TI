@@ -97,7 +97,6 @@ var ativosGroup = app.MapGroup("/api/ativos")
 
 // DTOs locais (Sprint 2) para não expor a entidade diretamente no body
 
-
 ativosGroup.MapPost("/", async (CreateAtivoRequest request, EventoTiDbContext db) =>
 {
     if (string.IsNullOrWhiteSpace(request.Name))
@@ -160,6 +159,27 @@ ativosGroup.MapPut("/{id:guid}", async (Guid id, UpdateAtivoRequest request, Eve
 })
 .WithName("UpdateAtivo");
 
+// ==================================================================
+// Sprint 2 – Inventário: CRUD + Status
+// Endpoint específico: alterar SOMENTE o Status do Ativo
+// PUT /api/ativos/{id}/status
+// Body: { "status": "Disponivel" }
+// ==================================================================
+ativosGroup.MapPut("/{id:guid}/status", async (Guid id, UpdateAtivoStatusRequest request, EventoTiDbContext db) =>
+{
+    var ativo = await db.Ativos.FirstOrDefaultAsync(a => a.Id == id);
+    if (ativo is null)
+        return Results.NotFound();
+
+    ativo.Status = request.Status;
+    ativo.UpdatedAt = DateTime.UtcNow;
+
+    await db.SaveChangesAsync();
+
+    return Results.Ok(ativo);
+})
+.WithName("UpdateAtivoStatus");
+
 ativosGroup.MapDelete("/{id:guid}", async (Guid id, EventoTiDbContext db) =>
 {
     var ativo = await db.Ativos.FirstOrDefaultAsync(a => a.Id == id);
@@ -172,9 +192,6 @@ ativosGroup.MapDelete("/{id:guid}", async (Guid id, EventoTiDbContext db) =>
     return Results.NoContent();
 })
 .WithName("DeleteAtivo");
-
-
-
 
 // Endpoint de exemplo (weatherforecast)
 var summaries = new[]
@@ -207,3 +224,6 @@ record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 
 record CreateAtivoRequest(string Name, string? Tag, string? SerialNumber, AtivoStatus? Status);
 record UpdateAtivoRequest(string Name, string? Tag, string? SerialNumber, AtivoStatus Status);
+
+// Sprint 2 – Inventário: CRUD + Status
+record UpdateAtivoStatusRequest(AtivoStatus Status);

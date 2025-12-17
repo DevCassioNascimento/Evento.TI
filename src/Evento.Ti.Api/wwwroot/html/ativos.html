@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evento.ti — Inventário (Ativos)</title>
+
+  <!-- Sprint 2 – Front Inventário -->
+  <link rel="stylesheet" href="/css/ativos.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Inventário — Ativos</h1>
+
+    <div class="topbar-actions">
+      <button id="btnRefresh" type="button">Atualizar lista</button>
+      <button id="btnLogout" type="button" class="danger">Sair</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <div id="errorBox" class="alert error" style="display:none;"></div>
+      <div id="okBox" class="alert ok" style="display:none;"></div>
+
+      <h2>Criar ativo</h2>
+
+      <form id="formCreateAtivo" class="form-grid">
+        <div class="field">
+          <label for="name">Nome</label>
+          <input id="name" name="name" placeholder="Ex.: Notebook Dell" required />
+        </div>
+
+        <div class="field">
+          <label for="tag">Tag</label>
+          <input id="tag" name="tag" placeholder="Ex.: TI-001" />
+        </div>
+
+        <div class="field">
+          <label for="serialNumber">Serial</label>
+          <input id="serialNumber" name="serialNumber" placeholder="Ex.: SN123" />
+        </div>
+
+        <div class="field actions">
+          <button id="btnCreate" type="submit" class="primary">Criar</button>
+        </div>
+      </form>
+
+      <p class="muted">
+        Observação: o Status é enum (int). A alteração de status será feita na tabela abaixo.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Lista de ativos</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Tag</th>
+              <th>Serial</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyAtivos"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Reaproveita seu session.js -->
+  <script src="/js/session.js"></script>
+
+  <!-- Sprint 2 – Front Inventário -->
+  <script src="/js/ativos.js"></script>
+</body>
+</html>

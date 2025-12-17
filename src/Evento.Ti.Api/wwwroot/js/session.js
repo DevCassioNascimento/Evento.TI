@@ -49,3 +49,9 @@ const SESSION = (() => {
 
   return { setToken, getToken, clear, isLoggedIn, authFetch };
 })();
+
+// ==================================================================
+// Sprint 2 – Front Inventário
+// Expor também no window para compatibilidade com scripts que usam window.SESSION
+// ==================================================================
+window.SESSION = SESSION;
