@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evento.TI — Admin</title>
+
+  <link rel="stylesheet" href="/css/admin.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Painel do Administrador</h1>
+
+    <div class="topbar-actions">
+      <button id="btnLogout" type="button" class="danger">Sair</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Escolha o módulo</h2>
+      <p class="muted">Selecione para onde deseja ir após o login.</p>
+
+      <div class="grid">
+        <div class="tile">
+          <h3>Inventário — Ativos</h3>
+          <p class="muted">Cadastrar, listar, alterar status e excluir ativos.</p>
+          <button id="btnGoAtivos" class="primary" type="button">Ir para Ativos</button>
+        </div>
+
+        <div class="tile">
+          <h3>Eventos</h3>
+          <p class="muted">Criar e gerenciar eventos (tela de eventos).</p>
+          <button id="btnGoEventos" class="primary" type="button">Ir para Eventos</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/session.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

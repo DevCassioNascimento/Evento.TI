@@ -5,6 +5,10 @@ using Evento.TI.Application.Common.Interfaces.Authentication;
 using Evento.Ti.Domain.Entities;
 using Evento.Ti.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using Evento.Ti.Application.Events.Create;
+using Microsoft.Extensions.DependencyInjection;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +17,37 @@ builder.Services.AddOpenApi();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
+
+// criando usuario para subir junto com o banco em dev Inico
+
+if (app.Environment.IsDevelopment())
+{
+    using var scope = app.Services.CreateScope();
+
+    var db = scope.ServiceProvider.GetRequiredService<EventoTiDbContext>();
+
+    // Se o banco já foi migrado e não existe nenhum usuário, cria um Admin padrão
+    if (!db.Users.Any())
+    {
+        var hasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher<User>>();
+
+        var admin = new User(
+            name: "Admin",
+            email: "admin@evento.ti",
+            passwordHash: "TEMP",
+            role: UserRole.Admin
+        );
+
+        var hash = hasher.HashPassword(admin, "Admin@123");
+        admin.UpdatePassword(hash);
+
+        db.Users.Add(admin);
+        db.SaveChanges();
+    }
+}
+
+// criando usuario para subir junto com o banco em dev FIM
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -199,6 +234,50 @@ var summaries = new[]
     "Freezing", "Bracing", "Chilly", "Cool", "Mild",
     "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
+
+var eventsGroup = app.MapGroup("/api/events")
+    .RequireAuthorization();
+
+eventsGroup.MapPost("/", async (
+    CreateEventRequest request,
+    ICreateEventService createEventService,
+    CancellationToken ct) =>
+{
+    try
+    {
+        var id = await createEventService.CreateAsync(request, ct);
+        return Results.Created($"/api/events/{id}", new { id });
+    }
+    catch (ArgumentException ex)
+    {
+        return Results.BadRequest(new { error = ex.Message });
+    }
+})
+.WithName("CreateEvent");
+
+eventsGroup.MapGet("/", async (EventoTiDbContext db, CancellationToken ct) =>
+{
+    var items = await db.Eventos
+        .AsNoTracking()
+        .OrderByDescending(e => e.Data)
+        .Select(e => new
+        {
+            e.Id,
+            e.Titulo,
+            e.Descricao,
+            e.Data,
+            e.Local,
+            e.DepartamentoResponsavel
+        })
+        .ToListAsync(ct);
+
+    return Results.Ok(items);
+})
+.WithName("ListEvents");
+
+
+
+
 
 app.MapGet("/weatherforecast", () =>
 {

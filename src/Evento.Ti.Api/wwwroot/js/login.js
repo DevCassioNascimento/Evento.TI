@@ -77,8 +77,8 @@ async function handleLoginSubmit(event) {
       setSuccess("Login realizado com sucesso.");
       console.log("Resposta do login:", data);
 
-      // Sprint 2 — ir para a tela de Inventário
-      window.location.href = "/html/ativos.html";
+      
+      window.location.href = "/html/admin.html";
 
     } else if (response.status === 401) {
       setError("E-mail ou senha inválidos.");

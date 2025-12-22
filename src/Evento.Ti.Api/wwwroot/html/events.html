@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evento.ti — Eventos</title>
+
+  <!-- Sprint 3 – Front Eventos (reaproveita o CSS do Inventário) -->
+  <link rel="stylesheet" href="/css/ativos.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Eventos — Cadastro & Lista</h1>
+
+    <div class="topbar-actions">
+      <button id="btnRefresh" type="button">Atualizar lista</button>
+      <button id="btnLogout" type="button" class="danger">Sair</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <div id="errorBox" class="alert error" style="display:none;"></div>
+      <div id="okBox" class="alert ok" style="display:none;"></div>
+
+      <h2>Criar evento</h2>
+
+      <form id="formCreateEvent" class="form-grid">
+        <div class="field" style="grid-column: span 2;">
+          <label for="titulo">Título</label>
+          <input id="titulo" name="titulo" placeholder="Ex.: Suporte no auditório" required />
+        </div>
+
+        <div class="field">
+          <label for="data">Data e horário</label>
+          <input id="data" name="data" type="datetime-local" required />
+        </div>
+
+        <div class="field">
+          <label for="local">Local</label>
+          <input id="local" name="local" placeholder="Ex.: Auditório" />
+        </div>
+
+        <div class="field">
+          <label for="departamentoResponsavel">Departamento responsável</label>
+          <input id="departamentoResponsavel" name="departamentoResponsavel" placeholder="Ex.: TI" required />
+        </div>
+
+        <div class="field" style="grid-column: 1 / -1;">
+          <label for="descricao">Descrição</label>
+          <input id="descricao" name="descricao" placeholder="Detalhes do evento (opcional)" />
+        </div>
+
+        <div class="field actions" style="grid-column: 1 / -1;">
+          <button id="btnCreate" type="submit" class="primary">Criar</button>
+        </div>
+      </form>
+
+      <p class="muted">
+        Observação: é necessário estar logado (JWT) para listar e criar eventos.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Lista de eventos</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Título</th>
+              <th>Data</th>
+              <th>Local</th>
+              <th>Departamento</th>
+              <th>ID</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyEvents"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/session.js"></script>
+
+  <!-- Sprint 3 – Front Eventos -->
+  <script src="/js/events.js"></script>
+</body>
+</html>
