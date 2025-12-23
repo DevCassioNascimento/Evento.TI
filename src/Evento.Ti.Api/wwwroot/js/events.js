@@ -1,7 +1,9 @@
 // ==================================================================
-// Sprint 3 – Front Eventos (Cadastro + Lista)
-// Listagem + Criação
-// Usa SESSION.authFetch() para injetar Bearer Token corretamente.
+// Sprint 4 – Front Eventos (Cadastro + Lista + Edição)
+// - Mantém criação (POST /api/events)
+// - Adiciona edição (PUT /api/events/{id})
+// - Renderiza coluna Ações (Editar/Cancelar)
+// - Usa SESSION.authFetch() para Bearer Token
 // ==================================================================
 
 (function () {
@@ -9,9 +11,13 @@
   const btnRefresh = document.getElementById("btnRefresh");
   const btnLogout = document.getElementById("btnLogout");
   const formCreate = document.getElementById("formCreateEvent");
+  const btnCreate = document.getElementById("btnCreate");
 
   const errorBox = document.getElementById("errorBox");
   const okBox = document.getElementById("okBox");
+
+  // Estado de edição
+  let editingId = null;
 
   function setMsg(type, text) {
     if (errorBox) { errorBox.style.display = "none"; errorBox.textContent = ""; }
@@ -49,10 +55,22 @@
   }
 
   function toIsoFromDatetimeLocal(value) {
-    // value ex: "2025-12-22T19:30"
     const d = new Date(value);
     if (isNaN(d.getTime())) return "";
-    return d.toISOString(); // envia em UTC (backend recebe timestamp with time zone)
+    return d.toISOString();
+  }
+
+  function toDatetimeLocalFromIso(iso) {
+    if (!iso) return "";
+    const d = new Date(iso);
+    if (isNaN(d.getTime())) return "";
+    const pad = (n) => String(n).padStart(2, "0");
+    const yyyy = d.getFullYear();
+    const mm = pad(d.getMonth() + 1);
+    const dd = pad(d.getDate());
+    const hh = pad(d.getHours());
+    const mi = pad(d.getMinutes());
+    return `${yyyy}-${mm}-${dd}T${hh}:${mi}`;
   }
 
   function formatDate(value) {
@@ -63,6 +81,25 @@
     } catch {
       return String(value);
     }
+  }
+
+  function clearEditingMode() {
+    editingId = null;
+    if (btnCreate) btnCreate.textContent = "Criar";
+  }
+
+  function setEditingMode(evt) {
+    editingId = pick(evt, "id", "Id", null);
+    if (btnCreate) btnCreate.textContent = "Salvar";
+
+    // Preenche formulário
+    document.getElementById("titulo").value = pick(evt, "titulo", "Titulo", "");
+    document.getElementById("descricao").value = pick(evt, "descricao", "Descricao", "");
+    document.getElementById("data").value = toDatetimeLocalFromIso(pick(evt, "data", "Data", ""));
+    document.getElementById("local").value = pick(evt, "local", "Local", "");
+    document.getElementById("departamentoResponsavel").value = pick(evt, "departamentoResponsavel", "DepartamentoResponsavel", "");
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   async function loadEvents() {
@@ -84,7 +121,7 @@
     if (!Array.isArray(data) || data.length === 0) {
       const tr = document.createElement("tr");
       const td = document.createElement("td");
-      td.colSpan = 5;
+      td.colSpan = 6; // agora existe coluna Ações
       td.innerHTML = "<small>Nenhum evento cadastrado.</small>";
       tr.appendChild(td);
       tbody.appendChild(tr);
@@ -94,7 +131,6 @@
     for (const e of data) {
       const id = pick(e, "id", "Id", "");
       const titulo = pick(e, "titulo", "Titulo", "");
-      const descricao = pick(e, "descricao", "Descricao", "");
       const dataEvt = pick(e, "data", "Data", "");
       const local = pick(e, "local", "Local", "");
       const depto = pick(e, "departamentoResponsavel", "DepartamentoResponsavel", "");
@@ -121,6 +157,78 @@
       tdId.innerHTML = `<small>${id}</small>`;
       tr.appendChild(tdId);
 
+      // Sprint 4: Ações (Editar / Cancelar)
+      const tdAcoes = document.createElement("td");
+
+      const btnEdit = document.createElement("button");
+      btnEdit.type = "button";
+      btnEdit.textContent = "Editar";
+      btnEdit.className = "secondary";
+      btnEdit.addEventListener("click", () => {
+        setMsg(null, null);
+        setEditingMode(e);
+      });
+
+      const btnCancel = document.createElement("button");
+      btnCancel.type = "button";
+      btnCancel.textContent = "Excluir";
+      btnCancel.className = "danger";
+      btnCancel.style.marginLeft = "8px";
+
+
+      // Sprint 4: força exibição mesmo se o CSS tiver display:none !important
+      tdAcoes.style.whiteSpace = "nowrap";
+      tdAcoes.style.minWidth = "160px";
+
+      btnEdit.style.setProperty("display", "inline-block", "important");
+      btnEdit.style.setProperty("visibility", "visible", "important");
+      btnEdit.style.setProperty("opacity", "1", "important");
+
+      btnCancel.style.setProperty("display", "inline-block", "important");
+      btnCancel.style.setProperty("visibility", "visible", "important");
+      btnCancel.style.setProperty("opacity", "1", "important");
+      // Sprint 4: força exibição mesmo se o CSS tiver display:none !important
+ 
+      
+      // excluir evento - funcionalidade extra
+      btnCancel.addEventListener("click", async () => {
+        setMsg(null, null);
+
+        const idToDelete = pick(e, "id", "Id", "");
+        if (!idToDelete) {
+          setMsg("error", "ID do evento não encontrado para exclusão.");
+          return;
+        }
+
+        const ok = confirm("Confirma excluir este evento?");
+        if (!ok) return;
+
+        const resDel = await SESSION.authFetch(`/api/events/${idToDelete}`, { method: "DELETE" });
+
+        if (resDel.status === 204) {
+          // Se eu estava editando o mesmo evento, limpa o form
+          if (editingId === idToDelete) {
+            formCreate.reset();
+            clearEditingMode();
+          }
+
+          setMsg("ok", "Evento excluído com sucesso.");
+          await loadEvents();
+          return;
+        }
+
+        // 409 = conflito (ex.: tem ativos vinculados)
+        const txt = await resDel.text();
+        setMsg("error", `Falha ao excluir: ${resDel.status} - ${txt}`);
+      });
+
+
+      // excluir evento - funcionalidade extra
+
+      tdAcoes.appendChild(btnEdit);
+      tdAcoes.appendChild(btnCancel);
+      tr.appendChild(tdAcoes);
+
       tbody.appendChild(tr);
     }
   }
@@ -142,16 +250,33 @@
     }
 
     let created = null;
-    try { created = await res.json(); } catch { /* ignore */ }
+    try { created = await res.json(); } catch { }
 
     const id = created?.id || created?.Id;
     setMsg("ok", id ? `Evento criado com sucesso. ID: ${id}` : "Evento criado com sucesso.");
-    await loadEvents();
   }
 
-  // ------------------------------------------------------------
-  // Eventos UI
-  // ------------------------------------------------------------
+  async function updateEvent(id, payload) {
+    setMsg(null, null);
+
+    if (!ensureLoggedIn()) return;
+
+    const res = await SESSION.authFetch(`/api/events/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(payload)
+    });
+
+    if (!res.ok) {
+      const txt = await res.text();
+      setMsg("error", `Falha ao editar evento: ${res.status} - ${txt}`);
+      return false;
+    }
+
+    setMsg("ok", "Evento atualizado com sucesso.");
+    return true;
+  }
+
+  // UI events
   if (btnRefresh) btnRefresh.addEventListener("click", loadEvents);
 
   if (btnLogout) {
@@ -186,11 +311,23 @@
         departamentoResponsavel
       };
 
+      // Sprint 4: se estiver editando, salva; senão, cria
+      if (editingId) {
+        const ok = await updateEvent(editingId, payload);
+        if (ok) {
+          formCreate.reset();
+          clearEditingMode();
+          await loadEvents();
+        }
+        return;
+      }
+
       await createEvent(payload);
       formCreate.reset();
+      await loadEvents();
     });
   }
 
-  // Carrega automaticamente
+  clearEditingMode();
   loadEvents();
 })();

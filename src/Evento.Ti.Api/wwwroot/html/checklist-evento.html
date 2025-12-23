@@ -1,0 +1,83 @@
+<!-- Sprint 4 - Tela Checklist do Evento (Ativos por Evento) - HTML separado -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Checklist do Evento - Ativos</title>
+
+  <!-- Sprint 4: CSS separado -->
+  <link rel="stylesheet" href="/css/checklist-evento.css" />
+</head>
+
+<body>
+  <header>
+    <div class="topbar">
+      <h1>Checklist do Evento — Ativos</h1>
+      <div class="muted">
+        <a class="link" href="/html/index.html">Voltar</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Sprint 4: token não aparece para o usuário, mas permanece para compatibilidade do JS -->
+    <input id="token" type="hidden" />
+
+    <div class="card">
+      <div class="row">
+        <div class="col-evento">
+          <label>Evento</label>
+          <select id="eventSelect"></select>
+        </div>
+
+        <div>
+          <button id="btnLoad" class="secondary">Carregar checklist</button>
+        </div>
+
+        <div>
+          <span id="apiStatus" class="status">API: aguardando</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="row">
+        <div class="col-flex">
+          <label>Adicionar ativo ao evento</label>
+          <select id="ativoSelect"></select>
+          <div class="muted">Este seletor lista os ativos disponíveis no inventário.</div>
+        </div>
+
+        <div>
+          <button id="btnAddAtivo">Vincular ativo</button>
+        </div>
+
+        <div>
+          <span id="msg" class="pill warn" style="display:none;"></span>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Ativo</th>
+            <th>Tag</th>
+            <th>Serial</th>
+            <th>Status</th>
+            <th>Separado</th>
+            <th class="right">Ações</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <tr><td colspan="6" class="muted">Carregue um evento para ver os ativos vinculados.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Sprint 4: JS separado -->
+  <script src="/js/session.js"></script>
+  <script src="/js/checklist-evento.js" defer></script>
+</body>
+</html>

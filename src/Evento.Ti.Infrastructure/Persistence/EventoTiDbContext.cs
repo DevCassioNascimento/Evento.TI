@@ -1,3 +1,5 @@
+// Sprint 4 - Relacionamento Evento-Ativo (EF Core mapping da entidade de junção)
+
 using Evento.Ti.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,8 +13,11 @@ namespace Evento.Ti.Infrastructure.Persistence
         }
 
         public DbSet<User> Users => Set<User>();
-
         public DbSet<Ativo> Ativos => Set<Ativo>();
+        public DbSet<Evento.Ti.Domain.Entities.Event> Eventos => Set<Evento.Ti.Domain.Entities.Event>();
+
+        // Sprint 4: entidade de junção
+        public DbSet<EventAtivo> EventAtivos => Set<EventAtivo>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -51,9 +56,7 @@ namespace Evento.Ti.Infrastructure.Persistence
                 builder.Property(u => u.UpdatedAt);
             });
 
-
             // Mapping: Ativo -> tabela "ativos"
-
             modelBuilder.Entity<Ativo>(builder =>
             {
                 builder.ToTable("ativos");
@@ -80,10 +83,69 @@ namespace Evento.Ti.Infrastructure.Persistence
                 builder.Property(a => a.UpdatedAt);
             });
 
+            modelBuilder.Entity<Evento.Ti.Domain.Entities.Event>(builder =>
+            {
+                builder.ToTable("eventos");
 
+                builder.HasKey(e => e.Id);
 
+                builder.Property(e => e.Titulo)
+                    .HasMaxLength(200)
+                    .IsRequired();
 
+                builder.Property(e => e.Descricao)
+                    .HasMaxLength(1000);
 
+                builder.Property(e => e.Data)
+                    .IsRequired();
+
+                builder.Property(e => e.Local)
+                    .HasMaxLength(200);
+
+                builder.Property(e => e.DepartamentoResponsavel)
+                    .HasMaxLength(150)
+                    .IsRequired();
+
+                builder.Property(e => e.CreatedAt)
+                    .IsRequired();
+
+                builder.Property(e => e.UpdatedAt);
+            });
+
+            // Sprint 4: Mapping EventAtivo -> tabela de junção
+            modelBuilder.Entity<EventAtivo>(builder =>
+            {
+                builder.ToTable("eventos_ativos");
+
+                // PK composta
+                builder.HasKey(x => new { x.EventId, x.AtivoId });
+
+                // Relacionamento com Event
+                builder.HasOne(x => x.Event)
+                    .WithMany(e => e.Ativos)
+                    .HasForeignKey(x => x.EventId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                // Relacionamento com Ativo
+                builder.HasOne(x => x.Ativo)
+                    .WithMany(a => a.Events)
+                    .HasForeignKey(x => x.AtivoId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                // Sprint 4: status "separado para o evento"
+                builder.Property(x => x.IsSeparado)
+                    .IsRequired()
+                    .HasDefaultValue(false);
+
+                builder.Property(x => x.CreatedAt)
+                    .IsRequired();
+
+                builder.Property(x => x.UpdatedAt);
+
+                // (Opcional, mas útil) índices de apoio
+                builder.HasIndex(x => x.AtivoId);
+                builder.HasIndex(x => x.EventId);
+            });
         }
     }
 }

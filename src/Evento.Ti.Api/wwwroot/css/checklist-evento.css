@@ -1,0 +1,158 @@
+/* Sprint 4 - Tela Checklist do Evento (Ativos por Evento) - CSS separado */
+
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f6f7f9;
+  color: #111;
+}
+
+header {
+  background: #111827;
+  color: #fff;
+  padding: 16px 20px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 18px;
+}
+
+main {
+  padding: 18px 20px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: end;
+}
+
+label {
+  font-size: 12px;
+  color: #374151;
+  display: block;
+  margin-bottom: 6px;
+}
+
+input, select, button {
+  height: 38px;
+  padding: 0 10px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  font-size: 14px;
+}
+
+input[type="checkbox"] {
+  height: auto;
+}
+
+button {
+  cursor: pointer;
+  border: 1px solid #111827;
+  background: #111827;
+  color: #fff;
+}
+
+button.secondary {
+  background: #fff;
+  color: #111827;
+}
+
+button.danger {
+  background: #b91c1c;
+  border-color: #b91c1c;
+}
+
+.muted {
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.status {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #3730a3;
+  display: inline-block;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  border-bottom: 1px solid #e5e7eb;
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 14px;
+}
+
+th {
+  font-size: 12px;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.right {
+  text-align: right;
+}
+
+.topbar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.link {
+  color: #93c5fd;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.pill {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #f3f4f6;
+  color: #111827;
+  display: inline-block;
+}
+
+.warn {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.col-flex {
+  min-width: 280px;
+  flex: 1;
+}
+
+.col-evento {
+  min-width: 220px;
+}

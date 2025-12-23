@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Evento.Ti.Infrastructure.Persistence.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(EventoTiDbContext))]
     [Migration("20251210194805_InitialCreate")]
     partial class InitialCreate
     {

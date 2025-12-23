@@ -17,6 +17,9 @@ namespace Evento.Ti.Domain.Entities
         // Status do inventário (controle operacional)
         public AtivoStatus Status { get; set; } = AtivoStatus.Disponivel;
 
+        // Sprint 4: relacionamento Evento-Ativo (entidade de junção)
+        public ICollection<EventAtivo> Events { get; set; } = new List<EventAtivo>();
+
         // Auditoria básica
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; set; }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Evento.Ti.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8e3644e28fe0761a36ce0c2643fc78ecc1f6b08b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+baa6c95a0e5adfac32e1f016a4efb3b8d992c7fd")]
 [assembly: System.Reflection.AssemblyProductAttribute("Evento.Ti.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Evento.Ti.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

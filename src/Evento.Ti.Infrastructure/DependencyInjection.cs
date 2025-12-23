@@ -11,6 +11,8 @@ using Evento.Ti.Infrastructure.Persistence;
 using Evento.Ti.Domain.Entities;
 using Evento.Ti.Application.Auth;
 using Evento.Ti.Infrastructure.Auth;
+using Evento.Ti.Application.Events.Create;
+using Evento.Ti.Infrastructure.Events.Create;
 
 namespace Evento.Ti.Infrastructure
 {
@@ -94,6 +96,7 @@ namespace Evento.Ti.Infrastructure
             // Aqui depois registraremos repositórios,
             // UnitOfWork, serviços adicionais, etc.
             // ======================================
+            services.AddScoped<ICreateEventService, CreateEventService>();
 
             return services;
         }
