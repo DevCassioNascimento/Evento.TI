@@ -26,6 +26,19 @@
     document.getElementById("btnGoEventos") ||
     document.getElementById("btnEventos");
 
+  // Sprint 5 - Presenças (Admin/Staff) inicio
+  const btnPresencas =
+  document.getElementById("btnGoPresencas") ||
+  document.getElementById("btnPresencas");
+
+  if (btnPresencas) {
+    btnPresencas.addEventListener("click", () => {
+      console.log("[admin.js] clicou Presenças");
+      window.location.href = "/html/events.html";
+    });
+  }
+  // Sprint 5 - Presenças (Admin/Staff) fim  
+
   const btnLogout = document.getElementById("btnLogout");
 
   if (!btnAtivos) console.warn("[admin.js] Botão Ativos não encontrado (IDs esperados: btnGoAtivos ou btnAtivos).");

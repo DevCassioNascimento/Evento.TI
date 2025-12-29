@@ -175,10 +175,30 @@
       btnCancel.className = "danger";
       btnCancel.style.marginLeft = "8px";
 
+    // Sprint 5: Presença (Equipe) + Painel (Admin/Staff) - Inicio
+    const btnPresence = document.createElement("button");
+    btnPresence.type = "button";
+    btnPresence.textContent = "Confirmar presença";
+    btnPresence.className = "secondary";
+    btnPresence.style.marginLeft = "8px";
+    btnPresence.addEventListener("click", () => {
+      window.location.href = `/html/event_presence.html?eventId=${encodeURIComponent(id)}`;
+    });
+
+    const btnPresenceAdmin = document.createElement("button");
+    btnPresenceAdmin.type = "button";
+    btnPresenceAdmin.textContent = "Ver presenças";
+    btnPresenceAdmin.className = "secondary";
+    btnPresenceAdmin.style.marginLeft = "8px";
+    btnPresenceAdmin.addEventListener("click", () => {
+      window.location.href = `/html/event_presence_admin.html?eventId=${encodeURIComponent(id)}`;
+    });
+    // Sprint 5: Presença (Equipe) + Painel (Admin/Staff) - Fim
+
 
       // Sprint 4: força exibição mesmo se o CSS tiver display:none !important
       tdAcoes.style.whiteSpace = "nowrap";
-      tdAcoes.style.minWidth = "160px";
+      tdAcoes.style.minWidth = "360px";
 
       btnEdit.style.setProperty("display", "inline-block", "important");
       btnEdit.style.setProperty("visibility", "visible", "important");
@@ -187,6 +207,14 @@
       btnCancel.style.setProperty("display", "inline-block", "important");
       btnCancel.style.setProperty("visibility", "visible", "important");
       btnCancel.style.setProperty("opacity", "1", "important");
+
+      btnPresence.style.setProperty("display", "inline-block", "important");
+      btnPresence.style.setProperty("visibility", "visible", "important");
+      btnPresence.style.setProperty("opacity", "1", "important");
+
+      btnPresenceAdmin.style.setProperty("display", "inline-block", "important");
+      btnPresenceAdmin.style.setProperty("visibility", "visible", "important");
+      btnPresenceAdmin.style.setProperty("opacity", "1", "important");
       // Sprint 4: força exibição mesmo se o CSS tiver display:none !important
  
       
@@ -227,8 +255,9 @@
 
       tdAcoes.appendChild(btnEdit);
       tdAcoes.appendChild(btnCancel);
+      tdAcoes.appendChild(btnPresence);
+      tdAcoes.appendChild(btnPresenceAdmin);
       tr.appendChild(tdAcoes);
-
       tbody.appendChild(tr);
     }
   }

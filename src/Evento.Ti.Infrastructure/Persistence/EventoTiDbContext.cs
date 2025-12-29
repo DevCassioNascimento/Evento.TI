@@ -1,4 +1,5 @@
 // Sprint 4 - Relacionamento Evento-Ativo (EF Core mapping da entidade de junção)
+// Sprint 5 - Presença da Equipe (EventPresence)
 
 using Evento.Ti.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,9 @@ namespace Evento.Ti.Infrastructure.Persistence
 
         // Sprint 4: entidade de junção
         public DbSet<EventAtivo> EventAtivos => Set<EventAtivo>();
+
+        // Sprint 5: presença (1 registro por usuário por evento)
+        public DbSet<EventPresence> EventPresences => Set<EventPresence>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -145,6 +149,37 @@ namespace Evento.Ti.Infrastructure.Persistence
                 // (Opcional, mas útil) índices de apoio
                 builder.HasIndex(x => x.AtivoId);
                 builder.HasIndex(x => x.EventId);
+            });
+
+            // Sprint 5: Mapping EventPresence -> tabela de presença
+            modelBuilder.Entity<EventPresence>(builder =>
+            {
+                builder.ToTable("eventos_presencas");
+
+                // PK composta (um registro por usuário por evento)
+                builder.HasKey(x => new { x.EventId, x.UserId });
+
+                builder.HasOne(x => x.Event)
+                    .WithMany()
+                    .HasForeignKey(x => x.EventId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                builder.HasOne(x => x.User)
+                    .WithMany()
+                    .HasForeignKey(x => x.UserId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                builder.Property(x => x.Status)
+                    .IsRequired();
+
+                builder.Property(x => x.Reason)
+                    .HasMaxLength(500);
+
+                builder.Property(x => x.UpdatedAt)
+                    .IsRequired();
+
+                builder.HasIndex(x => x.EventId);
+                builder.HasIndex(x => x.UserId);
             });
         }
     }

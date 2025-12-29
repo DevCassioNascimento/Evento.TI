@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evento.ti — Confirmar Presença</title>
+
+  <!-- Reaproveita o CSS existente -->
+  <link rel="stylesheet" href="/css/ativos.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <h1>Confirmar Presença</h1>
+
+    <div class="topbar-actions">
+      <button id="btnBack" type="button">Voltar</button>
+      <button id="btnLogout" type="button">Sair</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Evento</h2>
+
+      <div id="errorBox" class="alert error" style="display:none;"></div>
+      <div id="okBox" class="alert ok" style="display:none;"></div>
+
+      <div class="form-grid" style="margin-top: 10px;">
+        <div>
+          <label><strong>Título</strong></label>
+          <div id="evTitle">—</div>
+        </div>
+
+        <div>
+          <label><strong>Data</strong></label>
+          <div id="evDate">—</div>
+        </div>
+
+        <div>
+          <label><strong>Local</strong></label>
+          <div id="evLocal">—</div>
+        </div>
+
+        <div>
+          <label><strong>Departamento</strong></label>
+          <div id="evDept">—</div>
+        </div>
+
+        <div style="grid-column: 1 / -1;">
+          <label><strong>Seu status atual</strong></label>
+          <div id="myStatus">—</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Minha confirmação</h2>
+
+      <form id="formPresence">
+        <div style="display:flex; gap:16px; flex-wrap:wrap; margin: 10px 0;">
+          <label>
+            <input type="radio" name="status" value="Confirmed" />
+            Confirmado
+          </label>
+
+          <label>
+            <input type="radio" name="status" value="Declined" />
+            Não vou
+          </label>
+
+          <label>
+            <input type="radio" name="status" value="Late" />
+            Vou me atrasar
+          </label>
+        </div>
+
+        <div style="margin: 10px 0;">
+          <label for="reason"><strong>Motivo (opcional)</strong></label>
+          <textarea id="reason" rows="3" style="width:100%;" placeholder="Se quiser, descreva o motivo..."></textarea>
+          <small>Dica: normalmente é útil informar motivo em “Não vou” ou “Atraso”, mas o sistema não obriga.</small>
+        </div>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top: 12px;">
+          <button id="btnSave" type="submit">Salvar</button>
+          <button id="btnReload" type="button">Recarregar status</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Como abrir esta tela</h2>
+      <p>
+        Abra com o parâmetro <code>?eventId=GUID</code> (ou <code>?id=GUID</code>).
+      </p>
+      <p>
+        Exemplo: <code>/html/event_presence.html?eventId=SEU_EVENT_ID</code>
+      </p>
+    </section>
+  </main>
+
+  <script src="/js/session.js"></script>
+  <!-- Sprint 5 – Front Presença (Equipe) -->
+  <script src="/js/event_presence.js?v=sprint5"></script>
+</body>
+</html>

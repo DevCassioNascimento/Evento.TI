@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evento.ti — Presenças (Admin)</title>
+
+  <link rel="stylesheet" href="/css/ativos.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <h1>Presenças do Evento</h1>
+
+    <div class="topbar-actions">
+      <button id="btnBack" type="button">Voltar</button>
+      <button id="btnLogout" type="button">Sair</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Evento</h2>
+
+      <div id="errorBox" class="alert error" style="display:none;"></div>
+      <div id="okBox" class="alert ok" style="display:none;"></div>
+
+      <div class="form-grid" style="margin-top: 10px;">
+        <div>
+          <label><strong>Título</strong></label>
+          <div id="evTitle">—</div>
+        </div>
+
+        <div>
+          <label><strong>Data</strong></label>
+          <div id="evDate">—</div>
+        </div>
+
+        <div>
+          <label><strong>Local</strong></label>
+          <div id="evLocal">—</div>
+        </div>
+
+        <div>
+          <label><strong>Departamento</strong></label>
+          <div id="evDept">—</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Painel de confirmações</h2>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:end; margin: 10px 0;">
+        <div>
+          <label><strong>Filtro</strong></label><br />
+          <select id="statusFilter">
+            <option value="">Todos</option>
+            <option value="Confirmed">Confirmados</option>
+            <option value="Declined">Não vão</option>
+            <option value="Late">Atrasos</option>
+          </select>
+        </div>
+
+        <div>
+          <label><strong>Busca</strong></label><br />
+          <input id="search" type="text" placeholder="Nome ou e-mail" />
+        </div>
+
+        <div style="display:flex; gap:10px;">
+          <button id="btnReload" type="button">Recarregar</button>
+        </div>
+
+        <div style="margin-left:auto;">
+          <div><strong>Resumo</strong></div>
+          <div id="summary">—</div>
+        </div>
+      </div>
+
+      <div style="overflow:auto;">
+        <table class="table" id="tblPresences" style="width:100%; border-collapse: collapse;">
+          <thead>
+            <tr>
+              <th style="text-align:left;">Nome</th>
+              <th style="text-align:left;">E-mail</th>
+              <th style="text-align:left;">Status</th>
+              <th style="text-align:left;">Motivo</th>
+              <th style="text-align:left;">Atualizado em</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyPresences">
+            <tr><td colspan="5">Carregando...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="margin-top:10px;">
+        Abra com <code>?eventId=GUID</code> (ou <code>?id=GUID</code>).
+      </p>
+    </section>
+  </main>
+
+  <script src="/js/session.js"></script>
+  <!-- Sprint 5 – Admin Presenças -->
+  <script src="/js/event_presence_admin.js?v=sprint5"></script>
+</body>
+</html>

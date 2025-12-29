@@ -202,10 +202,14 @@ C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Proje
 C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\j1pt60bpg3-{0}-2hek30y32u-2hek30y32u.gz
 C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\s68yuk7hn5-{0}-q25sgydxu1-q25sgydxu1.gz
 C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\crpe0uqq33-{0}-0eqry8azkg-0eqry8azkg.gz
-C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\hibha6cbfh-{0}-eamr112yfu-eamr112yfu.gz
 C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\ug25215ku9-{0}-qmec08os19-qmec08os19.gz
-C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\sotnehe782-{0}-w27flg1enh-w27flg1enh.gz
 C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\se8nsz0210-{0}-jtwe879dcx-jtwe879dcx.gz
 C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\wy3xizk9by-{0}-mg5mjnfgyl-mg5mjnfgyl.gz
 C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\5dz5ryrnhi-{0}-vdlgcotvwq-vdlgcotvwq.gz
-C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\i65h2dvkir-{0}-lsrd5nmw61-lsrd5nmw61.gz
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\r7e6g7fpq8-{0}-etgyi32o43-etgyi32o43.gz
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\p8v4x7i46l-{0}-d8cgxv0zwt-d8cgxv0zwt.gz
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\sotnehe782-{0}-0tcc0onf47-0tcc0onf47.gz
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\ow8gnt95ii-{0}-gp7sxv0kae-gp7sxv0kae.gz
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\hibha6cbfh-{0}-kfqod8cgtu-kfqod8cgtu.gz
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\i65h2dvkir-{0}-iqd6i977in-iqd6i977in.gz
+C:\Users\cassio.nascimento\OneDrive - Adventistas\Documentos\Programação\Projetos_Net\Evento.TI\src\Evento.Ti.Api\obj\Debug\net10.0\compressed\t4krhvh5py-{0}-45a45cjgl5-45a45cjgl5.gz

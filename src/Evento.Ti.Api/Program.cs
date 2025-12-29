@@ -25,12 +25,11 @@ if (app.Environment.IsDevelopment())
     using var scope = app.Services.CreateScope();
 
     var db = scope.ServiceProvider.GetRequiredService<EventoTiDbContext>();
+    var hasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher<User>>();
 
-    // Se o banco já foi migrado e não existe nenhum usuário, cria um Admin padrão
-    if (!db.Users.Any())
+    // Cria Admin padrão se não existir (por e-mail)
+    if (!db.Users.Any(u => u.Email == "admin@evento.ti"))
     {
-        var hasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher<User>>();
-
         var admin = new User(
             name: "Admin",
             email: "admin@evento.ti",
@@ -38,12 +37,29 @@ if (app.Environment.IsDevelopment())
             role: UserRole.Admin
         );
 
-        var hash = hasher.HashPassword(admin, "Admin@123");
-        admin.UpdatePassword(hash);
+        var hashAdmin = hasher.HashPassword(admin, "Admin@123");
+        admin.UpdatePassword(hashAdmin);
 
         db.Users.Add(admin);
-        db.SaveChanges();
     }
+
+    // Cria usuário normal (Equipe/Staff) para testes se não existir (por e-mail)
+    if (!db.Users.Any(u => u.Email == "equipe@evento.ti"))
+    {
+        var staff = new User(
+            name: "Equipe",
+            email: "equipe@evento.ti",
+            passwordHash: "TEMP",
+            role: UserRole.Staff
+        );
+
+        var hashStaff = hasher.HashPassword(staff, "Equipe@123");
+        staff.UpdatePassword(hashStaff);
+
+        db.Users.Add(staff);
+    }
+
+    db.SaveChanges();
 }
 
 // criando usuario para subir junto com o banco em dev FIM
@@ -275,6 +291,31 @@ eventsGroup.MapGet("/", async (EventoTiDbContext db, CancellationToken ct) =>
 })
 .WithName("ListEvents");
 
+// Sprint 5 - Presença da Equipe (necessário para telas de presença) inicio
+eventsGroup.MapGet("/{id:guid}", async (Guid id, EventoTiDbContext db, CancellationToken ct) =>
+{
+    var evt = await db.Eventos
+        .AsNoTracking()
+        .FirstOrDefaultAsync(e => e.Id == id, ct);
+
+    if (evt is null)
+        return Results.NotFound(new { error = "Evento não encontrado." });
+
+    return Results.Ok(new
+    {
+        evt.Id,
+        evt.Titulo,
+        evt.Descricao,
+        evt.Data,
+        evt.Local,
+        evt.DepartamentoResponsavel
+    });
+})
+.WithName("GetEventById");
+
+
+// Sprint 5 - Presença da Equipe (necessário para telas de presença) fim
+
 eventsGroup.MapPut("/{id:guid}", async (Guid id, UpdateEventRequest request, EventoTiDbContext db, CancellationToken ct) =>
 {
     if (string.IsNullOrWhiteSpace(request.Titulo))
@@ -383,7 +424,10 @@ eventsGroup.MapPost("/{eventId:guid}/ativos/{ativoId:guid}", async (Guid eventId
 
     return Results.Created($"/api/events/{eventId}/ativos/{ativoId}", new { eventId, ativoId, isSeparado = link.IsSeparado });
 })
+.RequireAuthorization(policy =>
+    policy.RequireRole(nameof(UserRole.Admin), nameof(UserRole.Staff)))
 .WithName("AddAtivoToEvent");
+
 
 eventsGroup.MapPut("/{eventId:guid}/ativos/{ativoId:guid}/separado", async (Guid eventId, Guid ativoId, UpdateSeparadoRequest request, EventoTiDbContext db, CancellationToken ct) =>
 {
@@ -409,7 +453,178 @@ eventsGroup.MapDelete("/{eventId:guid}/ativos/{ativoId:guid}", async (Guid event
 
     return Results.NoContent();
 })
+.RequireAuthorization(policy =>
+    policy.RequireRole(nameof(UserRole.Admin)))
 .WithName("RemoveAtivoFromEvent");
+
+
+// Sprint 5 - Presença da Equipe (Equipe confirma/nega/atraso + Admin consulta painel) inicio 
+static Guid? TryGetUserIdFromClaims(System.Security.Claims.ClaimsPrincipal user)
+{
+    // Tentativas comuns (evita depender de um único claim)
+    var claimValue =
+        user.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.NameIdentifier)?.Value
+        ?? user.Claims.FirstOrDefault(c => c.Type == "sub")?.Value
+        ?? user.Claims.FirstOrDefault(c => c.Type == "userId")?.Value
+        ?? user.Claims.FirstOrDefault(c => c.Type == "id")?.Value;
+
+    if (Guid.TryParse(claimValue, out var id))
+        return id;
+
+    return null;
+}
+
+// PUT /api/events/{eventId}/presence/me
+// Body: { "status": "Confirmed|Declined|Late", "reason": "opcional" }
+eventsGroup.MapPut("/{eventId:guid}/presence/me", async (
+    Guid eventId,
+    HttpContext http,
+    EventoTiDbContext db,
+    CancellationToken ct) =>
+{
+    // 1) valida evento
+    var eventoExists = await db.Eventos.AsNoTracking().AnyAsync(e => e.Id == eventId, ct);
+    if (!eventoExists)
+        return Results.NotFound(new { error = "Evento não encontrado." });
+
+    // 2) pega userId do token
+    var userId = TryGetUserIdFromClaims(http.User);
+    if (userId is null)
+        return Results.Unauthorized();
+
+    // 3) lê body (sem criar DTO novo por enquanto)
+    var body = await http.Request.ReadFromJsonAsync<System.Text.Json.JsonElement>(cancellationToken: ct);
+
+    if (body.ValueKind != System.Text.Json.JsonValueKind.Object)
+        return Results.BadRequest(new { error = "Body inválido." });
+
+    if (!body.TryGetProperty("status", out var statusProp))
+        return Results.BadRequest(new { error = "Campo 'status' é obrigatório." });
+
+    PresenceStatus status;
+    if (statusProp.ValueKind == System.Text.Json.JsonValueKind.String)
+    {
+        var s = statusProp.GetString();
+        if (string.IsNullOrWhiteSpace(s) || !Enum.TryParse<PresenceStatus>(s, ignoreCase: true, out status))
+            return Results.BadRequest(new { error = "Status inválido. Use: Confirmed, Declined, Late." });
+    }
+    else if (statusProp.ValueKind == System.Text.Json.JsonValueKind.Number && statusProp.TryGetInt32(out var n))
+    {
+        if (!Enum.IsDefined(typeof(PresenceStatus), n))
+            return Results.BadRequest(new { error = "Status inválido." });
+
+        status = (PresenceStatus)n;
+    }
+    else
+    {
+        return Results.BadRequest(new { error = "Campo 'status' inválido." });
+    }
+
+    string? reason = null;
+    if (body.TryGetProperty("reason", out var reasonProp) && reasonProp.ValueKind == System.Text.Json.JsonValueKind.String)
+        reason = reasonProp.GetString();
+
+    // 4) upsert (1 registro por usuário por evento)
+    var presence = await db.EventPresences.FirstOrDefaultAsync(
+        x => x.EventId == eventId && x.UserId == userId.Value,
+        ct);
+
+    if (presence is null)
+    {
+        presence = new EventPresence
+        {
+            EventId = eventId,
+            UserId = userId.Value,
+            Status = status,
+            Reason = string.IsNullOrWhiteSpace(reason) ? null : reason!.Trim(),
+            UpdatedAt = DateTime.UtcNow
+        };
+
+        db.EventPresences.Add(presence);
+    }
+    else
+    {
+        presence.Status = status;
+        presence.Reason = string.IsNullOrWhiteSpace(reason) ? null : reason!.Trim();
+        presence.UpdatedAt = DateTime.UtcNow;
+    }
+
+    await db.SaveChangesAsync(ct);
+
+    return Results.Ok(new
+    {
+        presence.EventId,
+        presence.UserId,
+        status = presence.Status.ToString(),
+        presence.Reason,
+        presence.UpdatedAt
+    });
+})
+.WithName("SetMyPresence");
+
+// GET /api/events/{eventId}/presence/me
+eventsGroup.MapGet("/{eventId:guid}/presence/me", async (
+    Guid eventId,
+    HttpContext http,
+    EventoTiDbContext db,
+    CancellationToken ct) =>
+{
+    var userId = TryGetUserIdFromClaims(http.User);
+    if (userId is null)
+        return Results.Unauthorized();
+
+    var presence = await db.EventPresences.AsNoTracking().FirstOrDefaultAsync(
+        x => x.EventId == eventId && x.UserId == userId.Value,
+        ct);
+
+    if (presence is null)
+        return Results.Ok(null);
+
+    return Results.Ok(new
+    {
+        presence.EventId,
+        presence.UserId,
+        status = presence.Status.ToString(),
+        presence.Reason,
+        presence.UpdatedAt
+    });
+})
+.WithName("GetMyPresence");
+
+// GET /api/events/{eventId}/presences (Admin/Staff)
+eventsGroup.MapGet("/{eventId:guid}/presences", async (
+    Guid eventId,
+    EventoTiDbContext db,
+    CancellationToken ct) =>
+{
+    // (Opcional) valida evento
+    var eventoExists = await db.Eventos.AsNoTracking().AnyAsync(e => e.Id == eventId, ct);
+    if (!eventoExists)
+        return Results.NotFound(new { error = "Evento não encontrado." });
+
+    var items = await db.EventPresences
+        .Where(p => p.EventId == eventId)
+        .Select(p => new
+        {
+            p.UserId,
+            userName = p.User.Name,
+            userEmail = p.User.Email,
+            status = p.Status.ToString(),
+            p.Reason,
+            p.UpdatedAt
+        })
+        .OrderByDescending(x => x.UpdatedAt)
+        .ToListAsync(ct);
+
+    return Results.Ok(items);
+})
+.RequireAuthorization(policy =>
+    policy.RequireRole(nameof(UserRole.Admin), nameof(UserRole.Staff)))
+.WithName("ListEventPresences");
+
+// Sprint 5 - Presença da Equipe (Equipe confirma/nega/atraso + Admin consulta painel) Fim
+
+
 
 app.MapGet("/weatherforecast", () =>
 {
